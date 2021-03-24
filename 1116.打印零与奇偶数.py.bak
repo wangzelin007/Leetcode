@@ -1,0 +1,59 @@
+# -*- coding: utf-8 -*-
+"""
+    :author: Wang Zelin (王泽霖)
+    :url: 
+    :copyright: © 2018 Wang Zelin <1064534588@qq.com>
+    :license: MIT, see LICENSE for more details.
+"""
+from threading import *
+
+class ZeroEvenOdd:
+    def __init__(self, n):
+        self.n = n
+        self.zs = Semaphore(1)
+        self.es = Semaphore(0)
+        self.os = Semaphore(0)
+        self.flag = Semaphore(1)
+
+    # printNumber(x) outputs "x", where x is an integer.
+    def zero(self, printNumber: 'Callable[[int], None]') -> None:
+        for i in range(printNumber):
+            self.zs.acquire()
+            print('0')
+            if i % 2 == 0:
+                self.es.release()
+            else:
+                self.os.release()
+
+
+    def even(self, printNumber: 'Callable[[int], None]') -> None:
+        for i in range(printNumber):
+            if i % 2 == 0:
+                self.flag.acquire()
+                self.es.acquire()
+                print(i+1)
+                self.zs.release()
+
+    def odd(self, printNumber: 'Callable[[int], None]') -> None:
+        for i in range(printNumber):
+            if i % 2 != 0:
+                self.os.acquire()
+                print(i+1)
+                self.zs.release()
+                self.flag.release()
+
+if __name__ == '__main__':
+    n = 2
+    foo = ZeroEvenOdd(n)
+    theardA = Thread(target=foo.zero, args=(n,))
+    theardB = Thread(target=foo.even, args=(n,))
+    theardC = Thread(target=foo.odd, args=(n,))
+    theards = [theardA, theardB, theardC]
+    theardA.setDaemon(True)
+    theardB.setDaemon(True)
+    theardC.setDaemon(True)
+    theardA.start()
+    theardB.start()
+    theardC.start()
+    for t in theards:
+        t.join()

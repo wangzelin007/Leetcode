@@ -1,0 +1,41 @@
+# -*- coding: utf-8 -*-
+"""
+    :author: Wang Zelin (王泽霖)
+    :url: 
+    :copyright: © 2018 Wang Zelin <1064534588@qq.com>
+    :license: MIT, see LICENSE for more details.
+"""
+
+
+class FizzBuzz:
+    def __init__(self, n: int):
+        self.n = n
+        self.d = {}
+
+    def fizz(self, printFizz: 'Callable[[], None]') -> None:
+        self.d['f'] = printFizz
+        self.res()
+
+    def buzz(self, printBuzz: 'Callable[[], None]') -> None:
+        self.d['b'] = printBuzz
+        self.res()
+
+    def fizzbuzz(self, printFizzBuzz: 'Callable[[], None]') -> None:
+        self.d['fb'] = printFizzBuzz
+        self.res()
+
+    def number(self, printNumber: 'Callable[[int], None]') -> None:
+        self.d['n'] = printNumber
+        self.res()
+
+    def res(self):
+        if len(self.d) == 4:
+            for i in range(1, self.n + 1):
+                if i % 15 == 0:
+                    self.d['fb']()
+                elif i % 3 == 0:
+                    self.d['f']()
+                elif i % 5 == 0:
+                    self.d['b']()
+                else:
+                    self.d['n'](i)
