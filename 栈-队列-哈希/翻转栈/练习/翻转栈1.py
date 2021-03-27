@@ -5,6 +5,15 @@
     :copyright: © 2018 Wang Zelin <1064534588@qq.com>
     :license: MIT, see LICENSE for more details.
 """
+# 递归一
+# 结束条件只有一个元素
+# 1.将栈底元素 移动到 栈顶
+# 2.拿掉栈顶元素
+# 3.返回时将栈顶元素加回栈顶
+# 递归二 是递归一 步骤一的分解
+# 结束条件 只有一个元素
+# 1.递归处理
+# 2.将栈顶元素和子栈顶元素交换位置
 class Stack:
     def __init__(self):
         self.items = []
@@ -16,41 +25,38 @@ class Stack:
         return len(self.items)
 
     def peek(self):
-        if self.isEmpty():
-            return None
-        else:
+        if not self.isEmpty():
             return self.items[self.size()-1]
+        else:
+            return None
 
-    def push(self,x):
+    def push(self, x):
         self.items.append(x)
 
     def pop(self):
-        if self.isEmpty():
-            return None
+        if not self.isEmpty():
+            return self.items.pop()
         else:
-            self.items.pop()
+            return None
 
-def MoveMaxToTop(s):
+def moveBottomToTop(s):
     if s.isEmpty():
         return
     top1 = s.peek()
     s.pop()
     if not s.isEmpty():
-        MoveMaxToTop(s)
+        moveBottomToTop(s)
         top2 = s.peek()
-        if top1 < top2:
-            s.pop()
-            s.push(top1)
-            s.push(top2)
-            return
-    s.push(top1)
-
-
+        s.pop()
+        s.push(top1)
+        s.push(top2)
+    else:
+        s.push(top1)
 
 def reverse(s):
     if s.isEmpty():
         return
-    MoveMaxToTop(s)
+    moveBottomToTop(s)
     top = s.peek()
     s.pop()
     reverse(s)
@@ -58,12 +64,12 @@ def reverse(s):
 
 if __name__ == '__main__':
     s = Stack()
-    # 2 3 1
-    s.push(1)
+    s.push(5)
+    s.push(4)
     s.push(3)
     s.push(2)
+    s.push(1)
     reverse(s)
     while not s.isEmpty():
         print s.peek(),
         s.pop()
-    # 3 2 1
