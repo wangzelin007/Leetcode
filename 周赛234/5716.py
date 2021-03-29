@@ -36,3 +36,31 @@
 # n​​​​​​ 是一个偶数
 
 # 模拟法
+import copy
+
+class Solution(object):
+    def reinitializePermutation(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        origin = [i for i in range(n)]
+        perm = [i for i in range(n)]
+        arr = [i for i in range(n)]
+        ans = 0
+        while True:
+            for i in range(n):
+                if i % 2 == 0:
+                    arr[i] = perm[i/2]
+                else:
+                    arr[i] = perm[n / 2 + (i - 1) / 2]
+            ans += 1
+            perm = copy.deepcopy(arr)
+            if perm == origin:
+                return ans
+
+if __name__ == '__main__':
+    s = Solution()
+    print(s.reinitializePermutation(2))
+    print(s.reinitializePermutation(4))
+    print(s.reinitializePermutation(6))
