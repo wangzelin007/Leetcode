@@ -38,13 +38,15 @@ class Solution:
         # {9: 0, 3: 1, 15: 2, 20: 3, 7: 4}
         return recur(0, 0, len(inorder) - 1)
         # 0, 0, 4
-        # 1, 0, 0 left root+1, left=0, 1-1
-        # 2, 2, 4 right 1-0+0+1, i+1, 4
-        # 3, 2, 2 left
-        # 4, 4, 4 right
+        # 1, 0, 0
+        # 2, 2, 4
+        # 3, 2, 2
+        # 4, 4, 4
+        # preorder root, inorder left 起始位置 ,inorder right 最终位置
 
 if __name__ == '__main__':
     preorder = [3, 9, 20, 15, 7]
     inorder = [9, 3, 15, 20, 7]
     s = Solution()
-    s.buildTree(preorder, inorder)
+    node = s.buildTree(preorder, inorder)
+    print node
