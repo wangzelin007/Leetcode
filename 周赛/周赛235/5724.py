@@ -54,7 +54,7 @@ class Solution(object):
 
         diff = [abs(nums1[i] - nums2[i]) for i in range(len(nums1))]
         # print 'diff',diff # [1, 4, 0]
-        sorted_nums1 = sorted(nums1)
+        sorted_nums1 = sorted(nums1) # reverse=False 降序 reverse=True 升序
         max_dec, max_dec_i = 0, len(nums1)
         # print 'max_dec',max_dec,'max_dec-i',max_dec_i # 0 3
         for i in range(len(nums1)): # range(3) 0 1 2

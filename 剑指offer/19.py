@@ -42,3 +42,45 @@
 # s = "mississippi"
 # p = "mis*is*p*."
 # 输出: false
+
+# dp[i][j] s[0:i] p[0:j]
+# 五种情况：
+# p[j-1] != * :
+# 1. dp[i-1][j-1] & s[i-1] = p[j-1]      ab ab
+# 2. dp[i-1][j-1] & p[j-1] = .           ab a.
+# p[j-1] = * :
+# 1. dp[i][j-2]                          a  a?*
+# 2. dp[i-1][j] & s[i-1] = p[j-2]        aa a*
+# 3. dp[i-1][j] & p[j-2] = .             ab .*
+
+# "aaa"
+# "ab*a*c*a"
+
+class Solution:
+    def isMatch(self, s, p):
+        m, n = len(s) + 1, len(p) + 1 # 补0位 m行n列
+        dp = [[False] * n for _ in range(m)]
+        dp[0][0] = True
+        print dp
+        # 初始化首行 ?* ?*?* ?*?*?* 都是True
+        for j in range(2, n, 2):
+            dp[0][j] = dp[0][j-2] and p[j - 1] == '*'
+        print dp
+        for i in range(1, m):
+            for j in range(1, n):
+                if p[j-1] == '*':
+                    if dp[i][j-2]: return True
+                    elif dp[i-1][j] and s[i-1] == p[j-2]: dp[i][j] = True # aa a* | aa ab*a*c*
+                    elif dp[i-1][j] and p[j-2] == '.': dp[i][j] = True # ab .* | "aaa" ".*"
+                else:
+                    if dp[i-1][j-1] and s[i-1] == p[j-1]: dp[i][j] = True
+                    elif dp[i-1][j-1] and p[j-1] == '.': dp[i][j] = True
+        return dp[-1][-1]
+
+if __name__ == '__main__':
+    a = Solution()
+    s = "ab"
+    p = ".*"
+    # s = "mississippi"
+    # p = "mis*is*p*."
+    print(a.isMatch(s, p))
