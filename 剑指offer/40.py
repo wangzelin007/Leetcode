@@ -84,27 +84,62 @@ class Solution3(object):
             return arr[:k]
         return quick_sort(0, len(arr)-1)
 
-# 快排第k大
+# 返回最大的k个数
 # p = len(arr)-k
 # arr[p]代表第n-k+1 小即 第k大。
 class Solution4(object):
     def getLeastNumbers(self, arr, k):
-        pass
+        if k >= len(arr): return arr
+        def quickSort(l, r):
+            if l >= r: return
+            i, j = l, r
+            while i < j:
+                while i < j and arr[j] >= arr[l]: j -= 1
+                while i < j and arr[i] <= arr[l]: i += 1
+                arr[i], arr[j] = arr[j], arr[i]
+            arr[i], arr[l] = arr[l], arr[i]
+            if len(arr)-k < i: quickSort(l, i-1)
+            if len(arr)-k > i: quickSort(i+1, r)
+            return arr[len(arr)-k:]
+        return quickSort(0, len(arr)-1)
 
-# 堆排序第k小
+# 堆排序最小的k个元素 heapq
 # 构建k长度的大根堆，小于的插入，遍历完最后堆顶为第k小
+# 取反可以变成最大堆
+import heapq
 class Solution5(object):
     def getLeastNumbers(self, arr, k):
-        pass
+        if k == 0: return []
+        if k >= len(arr): return arr
+        heap = [-i for i in arr[:k]]
+        heapq.heapify(heap)
+        for i in arr[k:]:
+            if i< -heap[0]:
+                heapq.heappop(heap)
+                heapq.heappush(heap, -i)
+        return [-i for i in heap]
 
-# 堆排序第k大
+# 堆排序最小的k个元素 手动 todo
+
+# 堆排序最大的k个元素 heapq
 # 构建k长度的小跟堆，大于的插入，遍历完最后堆顶为第k大
+import heapq
 class Solution6(object):
     def getLeastNumbers(self, arr, k):
-        pass
+        if k == 0: return []
+        if k >= len(arr): return arr
+        heap = arr[0:k]
+        heapq.heapify(heap)
+        for i in arr[k:]:
+            if i > heap[0]:
+                heapq.heappop(heap)
+                heapq.heappush(heap, i)
+        return heap
+
+# 堆排序最大的k个元素 手动 todo
 
 if __name__ == '__main__':
-    s = Solution3()
+    s = Solution6()
     arr = [4,5,1,6,2,7,3,8,0,2,3,3,2]
     arr2 = [4,5,1,6,2,7,3,8,0,2,3,3,2]
     arr2.sort()

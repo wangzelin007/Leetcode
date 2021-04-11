@@ -57,7 +57,7 @@ import bisect
 # [1, 3, 3, 3, 6, 8, 12, 15]
 # [1, 3, 3, 3, 3, 6, 8, 12, 15]
 # x = 4 bisect_left = biset_right = 3
-# 所以要找小余解，用bisect_right好，答案即bisect_right - 1
+# 所以要找小于解，用bisect_right好，答案即bisect_right - 1
 # print(bisect.bisect_left(L, x, 0))
 # print(bisect.bisect_right(L, x, 0))
 
