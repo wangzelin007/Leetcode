@@ -103,7 +103,7 @@ class Solution4(object):
             return arr[len(arr)-k:]
         return quickSort(0, len(arr)-1)
 
-# 堆排序最小的k个元素 heapq
+# 堆排序最小的k个元素 heapq 前k小
 # 构建k长度的大根堆，小于的插入，遍历完最后堆顶为第k小
 # 取反可以变成最大堆
 import heapq
@@ -121,7 +121,7 @@ class Solution5(object):
 
 # 堆排序最小的k个元素 手动 todo
 
-# 堆排序最大的k个元素 heapq
+# 堆排序最大的k个元素 heapq 前k大
 # 构建k长度的小跟堆，大于的插入，遍历完最后堆顶为第k大
 import heapq
 class Solution6(object):
@@ -137,6 +137,7 @@ class Solution6(object):
         return heap
 
 # 堆排序最大的k个元素 手动 todo
+# https://leetcode-cn.com/problems/kth-largest-element-in-an-array/solution/ge-chong-pai-xu-suan-fa-tu-xie-zong-jie-by-ke-ai-x/
 
 if __name__ == '__main__':
     s = Solution6()
