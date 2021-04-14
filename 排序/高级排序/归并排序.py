@@ -20,9 +20,12 @@ def merge_sort(alist):
             result.append(right[right_point])
             right_point += 1
 
-    result += left[right_point:]
-    result += right[left_point:]
+    result += left[left_point:]
+    result += right[right_point:]
     return result
+
+if __name__ == '__main__':
+    print(merge_sort([5,6,7,1,2,3,4,8]))
 
 # 作者：xiao-xie-shui-bu-xing
 # 链接：https://leetcode-cn.com/problems/kth-largest-element-in-an-array/solution/ge-chong-pai-xu-suan-fa-tu-xie-zong-jie-by-ke-ai-x/
