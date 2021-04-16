@@ -1,0 +1,42 @@
+# 废弃
+https://segmentfault.com/a/1190000014935970
+
+sudo pip3 install virtualenvwrapper
+
+mkdir -p ~/Envs
+
+vim ~/.bash_profile
+# 设置virtualenvwrapper
+export WORKON_HOME=~/Envs
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+# 打开终端自动启用
+source /usr/local/bin/virtualenvwrapper.sh
+
+vim ~/.zshrc
+# 设置virtualenvwrapper
+export WORKON_HOME=~/Envs
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+# 打开终端自动启用
+source /usr/local/bin/virtualenvwrapper.sh
+
+source ~/.bash_profile
+source ~/.zshrc
+
+mkvirtualenv py3.9 --python=python3.9
+
+lsvirtualenv
+
+workon py3.9
+
+deactivate
+
+rmvirtualenv py3
+
+# 钩子
+vim ~/Envs/test/bin/postactivate
+#!/bin/zsh
+# This hook is sourced after this virtualenv is activated.
+# 在当前会话加入环境变量
+export ENV=dev
+pip install -r requirements.txt
+pip install -e conf

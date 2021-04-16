@@ -4,7 +4,7 @@
 
 #可借助python中的heapq模块实现堆的功能, 注意建立的是小根堆
 class Solution1:
-    def findKthLargest(self, nums: List[int], k: int) -> int:
+    def findKthLargest(self, nums: list[int], k: int) -> int:
         import heapq as hq
         heap = []
         for i in nums:
@@ -16,7 +16,7 @@ class Solution1:
 
 # 自己实现堆
 class Solution2:
-    def findKthLargest(self, nums: List[int], k: int) -> int:
+    def findKthLargest(self, nums: list[int], k: int) -> int:
         n = len(nums)
         heap = nums[:k]
         # 建立含k个元素的小根堆
@@ -50,7 +50,13 @@ class Solution2:
         else:
             alist[i] = tmp # j越界跳出循环，则把根节点放在叶子节点
 
-作者：xiao-xie-shui-bu-xing
-链接：https://leetcode-cn.com/problems/kth-largest-element-in-an-array/solution/ge-chong-pai-xu-suan-fa-tu-xie-zong-jie-by-ke-ai-x/
-来源：力扣（LeetCode）
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+if __name__ == '__main__':
+    s = Solution1()
+    nums = [9,7,3,1,2,5,8,11]
+    print (sorted(nums, reverse=True))
+    k = 3
+    print(s.findKthLargest(nums, k))
+# 作者：xiao-xie-shui-bu-xing
+# 链接：https://leetcode-cn.com/problems/kth-largest-element-in-an-array/solution/ge-chong-pai-xu-suan-fa-tu-xie-zong-jie-by-ke-ai-x/
+# 来源：力扣（LeetCode）
+# 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

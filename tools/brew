@@ -1,0 +1,11 @@
+https://zhuanlan.zhihu.com/p/103478437
+cd "$(brew --repo)"
+git remote -v
+git pull origin master
+brew update
+
+cd "$(brew --repo)"
+git remote set-url origin https://mirrors.ustc.edu.cn/brew.git
+
+cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git

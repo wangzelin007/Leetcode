@@ -6,7 +6,7 @@
 # 时间复杂度 O(NlogN) ： 库函数、快排等排序算法的平均时间复杂度为 O(NlogN) 。
 # 空间复杂度 O(N) ： 快速排序的递归深度最好（平均）为 O(logN) ，最差情况（即输入数组完全倒序）为 O(N)。
 class Solution:
-    def getLeastNumbers(self, arr: List[int], k: int) -> List[int]:
+    def getLeastNumbers(self, arr: list[int], k: int) -> list[int]:
         def quick_sort(arr, l, r):
             # 子数组长度为 1 时终止递归
             if l >= r: return

@@ -15,7 +15,7 @@ def sift(alist, low, high):
     j = i*2 + 1 #j指向i的左子树
     tmp = alist[i]
     while j <=high:
-        if j+1<= high and alist[j] < alist[j+1] #右子树比较大,则指向右子树
+        if j+1<= high and alist[j] < alist[j+1]: # 右子树比较大,则指向右子树
             j = j+1
         if alist[j] > tmp:  # 若子树的值比较大，则根节点换成子树，然后向下看一层
             alist[i] = alist[j]
