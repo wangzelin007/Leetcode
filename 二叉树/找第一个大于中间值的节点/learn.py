@@ -28,7 +28,7 @@ def getMinNode(root):
 def arrayToTree(arr,start,end):
     if end >= start:
         root = BiTNode()
-        mid = (start+end+1)/2
+        mid = (start+end+1)//2
         root.data = arr[mid]
         root.lchild = arrayToTree(arr,start,mid-1)
         root.rchild = arrayToTree(arr,mid+1,end)
@@ -39,7 +39,7 @@ def arrayToTree(arr,start,end):
 def printTree(root):
     if not root: return
     printTree(root.lchild)
-    print root.data,
+    print(root.data,end=" ")
     printTree(root.rchild)
 
 def finNode(root):
@@ -60,6 +60,6 @@ if __name__ == '__main__':
     arr = [1,2,3,4,5,6,7]
     root = arrayToTree(arr,0,len(arr)-1)
     printTree(root)
-    print '\n'
+    print('\n')
     print(finNode(root))
 

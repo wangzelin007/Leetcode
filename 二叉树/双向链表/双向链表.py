@@ -20,7 +20,7 @@ class Test:
     def arrayToTree(self,arr,start,end):
         root = None
         if end >= start:
-            mid = (start+end+1)/2
+            mid = (start+end+1)//2
             root = BiTNode()
             root.data = arr[mid]
             root.lchild = self.arrayToTree(arr,start,mid-1)
@@ -49,10 +49,10 @@ if __name__ == '__main__':
     test.inOrderBSTree(root)
     cur = test.pHead
     while cur:
-        print cur.data,
+        print(cur.data,end=" ")
         cur = cur.rchild
-    print '\n'
+    print('\n')
     cur = test.pEnd
     while cur:
-        print cur.data,
+        print(cur.data,end=" ")
         cur = cur.lchild

@@ -42,7 +42,7 @@ class Test:
         root.rchild = node2
         node1.lchild = node3
         node1.rchild = node4
-        print node2.lchild,node2.rchild,node3.lchild,node3.rchild,node4.lchild,node4.rchild
+        print(node2.lchild,node2.rchild,node3.lchild,node3.rchild,node4.lchild,node4.rchild)
         return root
 
 
@@ -51,5 +51,5 @@ if __name__ == '__main__':
     root = test.constructTree()
     maxRoot = BiTNode()
     test.findMaxSubTree(root,maxRoot)
-    print '最大子树和：' + str(test.maxSum)
-    print '对应的根结点：' + str(maxRoot.data)
+    print('最大子树和：' + str(test.maxSum))
+    print('对应的根结点：' + str(maxRoot.data))

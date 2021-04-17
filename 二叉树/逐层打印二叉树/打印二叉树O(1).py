@@ -18,7 +18,7 @@ class BiTNode:
 def arrayToTree(arr,start,end):
     if end >= start:
         root = BiTNode()
-        mid = (start+end+1)/2
+        mid = (start+end+1)//2
         root.data = arr[mid]
         root.lchild = arrayToTree(arr,start,mid-1)
         root.rchild = arrayToTree(arr,mid+1,end)
@@ -30,7 +30,7 @@ def printAtLevel(root,level):
     if root == None or level < 0:
         return 0
     elif level == 0:
-        print root.data,
+        print(root.data,end=" ")
         return 1
     else:
         return printAtLevel(root.lchild,level-1)+printAtLevel(root.rchild,level-1)

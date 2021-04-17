@@ -44,4 +44,4 @@ if __name__ == '__main__':
     m = InitRef()
     m.max = -2**31
     findMaxPathRecur(root,m)
-    print m.max,
+    print(m.max,end=" ")

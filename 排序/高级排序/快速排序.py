@@ -24,6 +24,9 @@ class Solution:
         quick_sort(arr, 0, len(arr) - 1)
         return arr[:k]
 
+# 快排改进 todo
+# https://zhuanlan.zhihu.com/p/142391758
+
 # 作者：jyd
 # 链接：https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/solution/jian-zhi-offer-40-zui-xiao-de-k-ge-shu-j-9yze/
 # 来源：力扣（LeetCode）

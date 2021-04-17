@@ -16,7 +16,7 @@ if __name__ == '__main__':
     for i in range(len(ips)):
         cache[ips[i]] = names[i]
     ip = '1.1.1.1'
-    print searchDns(ip,cache)
+    print (searchDns(ip,cache))
     ip = '1.1.1.2'
-    print searchDns(ip,cache)
+    print (searchDns(ip,cache))
 # 二叉树 最左前缀匹配 以后再看，python 面试手册

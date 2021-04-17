@@ -16,7 +16,7 @@ class BiTNode:
 def arrayToTree(arr,start,end):
     root = None
     if end >= start:
-        mid = (start+end+1)/2
+        mid = (start+end+1)//2
         root = BiTNode()
         root.data = arr[mid]
         root.lchild = arrayToTree(arr,start,mid-1)
@@ -29,7 +29,7 @@ def printForwardTree(root):
     # 前序遍历 中左右
     if not root:
         return
-    print root.data,
+    print(root.data,end=" ")
     if root.lchild:
         printForwardTree(root.lchild)
     if root.rchild:
@@ -41,7 +41,7 @@ def printTree(root):
         return
     if root.lchild:
         printTree(root.lchild)
-    print root.data,
+    print(root.data,end=" ")
     if root.rchild:
         printTree(root.rchild)
 
@@ -53,7 +53,7 @@ def printBackTree(root):
         printBackTree(root.lchild)
     if root.rchild:
         printBackTree(root.rchild)
-    print root.data,
+    print(root.data,end=" ")
 
 def printLayerTree(root):
     if not root:
@@ -62,7 +62,7 @@ def printLayerTree(root):
     q.append(root)
     while len(q) > 0:
         root = q.popleft()
-        print root.data,
+        print(root.data,end=" ")
         if root.lchild:
             q.append(root.lchild)
         if root.rchild:
@@ -83,16 +83,16 @@ if __name__ == '__main__':
     arr = [1,2,3,4,5,6,7,8,9,10]
     root = arrayToTree(arr,0,len(arr)-1)
     printForwardTree(root)
-    print '\n'
+    print('\n')
     printTree(root)
-    print '\n'
+    print('\n')
     printLayerTree(root)
-    print '\n'
+    print('\n')
     printBackTree(root)
     root1 = copyTree(root)
-    print '\n'
+    print('\n')
     printTree(root1)
-    print '\n'
+    print('\n')
     printLayerTree(root1)
-    print '\n'
+    print('\n')
     printBackTree(root1)

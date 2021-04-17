@@ -16,7 +16,7 @@ class BiTNode:
 def arrayToTree(arr,start,end):
     if end >= start:
         root = BiTNode()
-        mid = (start+end+1)/2
+        mid = (start+end+1)//2
         root.data = arr[mid]
         root.lchild = arrayToTree(arr,start,mid-1)
         root.rchild = arrayToTree(arr,mid+1,end)
@@ -30,7 +30,7 @@ def printTree(root):
         return
     if root.lchild:
         printTree(root.lchild)
-    print root.data,
+    print(root.data,end=" ")
     if root.rchild:
         printTree(root.rchild)
 
@@ -42,7 +42,7 @@ def printLayerTree(root):
     q.append(root)
     while len(q) > 0:
         tmp = q.popleft()
-        print tmp.data,
+        print(tmp.data,end=" ")
         if tmp.lchild:
             q.append(tmp.lchild)
         if tmp.rchild:
@@ -65,7 +65,7 @@ if __name__ == '__main__':
     long = len(arr)
     root = arrayToTree(arr,0,long-1)
     printTree(root)
-    print '\n'
+    print('\n')
     printLayerTree(root)
     print(isEqual(root,root))
     arr2 = [1,2,3,4,5,6,7,8,9,11]

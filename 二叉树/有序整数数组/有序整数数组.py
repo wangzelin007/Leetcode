@@ -15,7 +15,7 @@ def arrayToTree(arr,start,end):
     root = None
     if end >= start:
         root = BiTNode()
-        mid = (start+end+1)/2 # mid 是下标
+        mid = (start+end+1)//2 # mid 是下标
         root.data = arr[mid]
         # start end 看似不变，其实可能会变为mid+1和mid-1
         root.lchild = arrayToTree(arr, start, mid-1)
@@ -30,17 +30,17 @@ def printTreeMidOrder(root):
         return
     if root.lchild:
         printTreeMidOrder(root.lchild)
-    print root.data,
+    print(root.data, end=" ")
     if root.rchild:
         printTreeMidOrder(root.rchild)
 
 if __name__ == '__main__':
     arr = [1,2,3,4,5,6,7,8,9,10]
-    print "数组：",
+    print("数组：", end=" ")
     i=0
     while i<len(arr):
-        print arr[i],
+        print(arr[i], end=" ")
         i += 1
     root = arrayToTree(arr,0,len(arr)-1)
-    print "\n数的中序遍历：",
+    print("\n数的中序遍历：",end=" ")
     printTreeMidOrder(root)
