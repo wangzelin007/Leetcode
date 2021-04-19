@@ -1,0 +1,29 @@
+http://www.ruanyifeng.com/blog/computer/ 精华文章
+xor: http://www.ruanyifeng.com/blog/2021/01/_xor.html
+xor加密: http://www.ruanyifeng.com/blog/2017/05/xor.html
+※ dns: http://www.ruanyifeng.com/blog/2016/06/dns.html
+※ 互联网协议入门1: http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html
+※ 互联网协议入门2: http://www.ruanyifeng.com/blog/2012/06/internet_protocol_suite_part_ii.html
+SMTP: http://www.ruanyifeng.com/blog/2017/06/smtp-protocol.html
+进程与线程: http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html
+编译器: http://www.ruanyifeng.com/blog/2014/11/compiler.html
+容错，高可用和灾备: http://www.ruanyifeng.com/blog/2019/11/fault-tolerance.html
+CAP: http://www.ruanyifeng.com/blog/2018/07/cap.html
+IaaS，Paas，SaaS: http://www.ruanyifeng.com/blog/2017/07/iaas-paas-saas.html
+※ TCP: http://www.ruanyifeng.com/blog/2017/06/tcp-protocol.html
+※ User space 和 Kernel space: http://www.ruanyifeng.com/blog/2016/12/user_space_vs_kernel_space.html
+字节序: http://www.ruanyifeng.com/blog/2016/11/byte-order.html
+布尔代数: http://www.ruanyifeng.com/blog/2016/08/boolean-algebra.html
+※ 四位计算机实现及其原理: http://www.ruanyifeng.com/blog/2011/03/4-bit_computer.html
+※ 补码: http://www.ruanyifeng.com/blog/2009/08/twos_complement.html
+计算机启动: http://www.ruanyifeng.com/blog/2013/02/booting.html
+0x7C00: http://www.ruanyifeng.com/blog/2015/09/0x7c00.html
+Monad: http://www.ruanyifeng.com/blog/2015/07/monad.html
+数据压缩与信息熵: http://www.ruanyifeng.com/blog/2014/09/information-entropy.html
+※ 数据库的最简单实现: http://www.ruanyifeng.com/blog/2014/07/database_implementation.html
+※ Stack的三种含义: http://www.ruanyifeng.com/blog/2013/11/stack.html
+寄存器VS内存: http://www.ruanyifeng.com/blog/2013/10/register.html
+※ linux启动流程: http://www.ruanyifeng.com/blog/2013/08/linux_boot_process.html
+※ unix目录结构: http://www.ruanyifeng.com/blog/2012/02/a_history_of_unix_directory_structure.html
+KMP算法: http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html
+※ Boyer-Moore算法: http://www.ruanyifeng.com/blog/2013/05/boyer-moore_string_search_algorithm.html
