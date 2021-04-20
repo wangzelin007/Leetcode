@@ -30,7 +30,7 @@ heappush(h, (1, 'write spec'))
 heappush(h, (3, 'create tests'))
 heappop(h) #(1, 'write spec')
 
-# 堆常用于实现优先队列 todo
+# 堆常用于实现优先队列 complete -> 周赛237-3
 import itertools
 pq = []                         # list of entries arranged in a heap
 entry_finder = {}               # mapping of tasks to entries

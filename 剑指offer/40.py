@@ -144,7 +144,7 @@ if __name__ == '__main__':
     arr = [4,5,1,6,2,7,3,8,0,2,3,3,2]
     arr2 = [4,5,1,6,2,7,3,8,0,2,3,3,2]
     arr2.sort()
-    print arr2
+    print(arr2)
     k = 0
     print(s.getLeastNumbers(arr, k))
     k = 1

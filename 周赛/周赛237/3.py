@@ -1,4 +1,4 @@
-# 5736. 单线程 CPU todo
+# 5736. 单线程 CPU complete
 # 给你一个二维数组 tasks ，用于表示 n 项从 0 到 n - 1 编号的任务。
 # 其中 tasks[i] = [enqueueTimei, processingTimei] 意味着第 i 项任务将会于 enqueueTimei 时进入任务队列，需要 processingTimei 的时长完成执行。
 # 现有一个单线程 CPU ，同一时间只能执行 最多一项 任务，该 CPU 将会按照下述方式运行：
@@ -104,7 +104,33 @@ class Solution3:
         dfs(start_time, window)
         return res
 
+class Solution:
+    def getOrder(self, tasks: List[List[int]]) -> List[int]:
+        # 1. 按照 enqueueTime processingTime index 排序 从小到大
+        # 2. 按照 processingTime index enqueueTime 从小到大 支持push和pop 最小堆
+        # 因为如果 pt 相同，index 小的需要排列在前面
+        tasks = sorted(enumerate(tasks), key=lambda x: (x[1][0], x[1][1], x[0]))
+        print(tasks)
+        heap = []
+        ans = []
+        time = 0
+        while tasks or heap:
+            if heap:
+                pt, idx, et = heapq.heappop(heap)
+            else:
+                idx, v = tasks.pop(0)
+                et, pt = v
+            ans.append(idx)
+            time = max(time, et) + pt
+            while tasks and tasks[0][1][0] <= time:
+                idx, v = tasks.pop(0)
+                et, pt = v
+                heapq.heappush(heap, (pt, idx, et))
+        return ans
+
 if __name__ == '__main__':
-    s = Solution3()
+    s = Solution()
     tasks = [[1,2],[2,4],[3,2],[4,1]] # 0,2,3,1
+    tasks = [[19,13],[16,9],[21,10],[32,25],[37,4],[49,24],[2,15],[38,41],[37,34],[33,6],[45,4],[18,18],[46,39],[12,24]]
+    # ans = [6,1,2,9,4,10,0,11,5,13,3,8,12,7]
     print(s.getOrder(tasks))

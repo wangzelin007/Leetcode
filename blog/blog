@@ -1,4 +1,5 @@
-http://www.ruanyifeng.com/blog/computer/ 精华文章
+计算机精华文章:
+http://www.ruanyifeng.com/blog/computer/
 xor: http://www.ruanyifeng.com/blog/2021/01/_xor.html
 xor加密: http://www.ruanyifeng.com/blog/2017/05/xor.html
 ※ dns: http://www.ruanyifeng.com/blog/2016/06/dns.html
@@ -25,5 +26,53 @@ Monad: http://www.ruanyifeng.com/blog/2015/07/monad.html
 寄存器VS内存: http://www.ruanyifeng.com/blog/2013/10/register.html
 ※ linux启动流程: http://www.ruanyifeng.com/blog/2013/08/linux_boot_process.html
 ※ unix目录结构: http://www.ruanyifeng.com/blog/2012/02/a_history_of_unix_directory_structure.html
+※ Unix哲学: http://www.ruanyifeng.com/blog/2009/06/unix_philosophy.html
 KMP算法: http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html
 ※ Boyer-Moore算法: http://www.ruanyifeng.com/blog/2013/05/boyer-moore_string_search_algorithm.html
+※ 代码的抽象三原则: http://www.ruanyifeng.com/blog/2013/01/abstraction_principles.html
+※ 函数式编程: http://www.ruanyifeng.com/blog/2012/04/functional_programming.html
+※ SSH1: http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html
+※ SSH2: http://www.ruanyifeng.com/blog/2011/12/ssh_port_forwarding.html
+※ inode: http://www.ruanyifeng.com/blog/2011/12/inode.html
+※ EOF: http://www.ruanyifeng.com/blog/2011/11/eof.html
+CPL: http://www.ruanyifeng.com/blog/2011/10/characters_per_line.html
+※ Linux系统负荷: http://www.ruanyifeng.com/blog/2011/07/linux_load_average_explained.html
+DOS: http://www.ruanyifeng.com/blog/2011/07/history_of_dos.html
+Lisp: http://www.ruanyifeng.com/blog/2010/10/why_lisp_is_superior.html
+语言对比: http://www.ruanyifeng.com/blog/2010/03/programming_language_evaluations_revised.html
+Web service: http://www.ruanyifeng.com/blog/2009/08/what_is_web_service.html
+※ 字符编码: http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html
+回车和换行: http://www.ruanyifeng.com/blog/2006/04/post_213.html
+
+算法文章:
+http://www.ruanyifeng.com/blog/algorithm/
+圆: http://www.ruanyifeng.com/blog/2009/01/what_is_a_circle.html
+e: http://www.ruanyifeng.com/blog/2011/07/mathematical_constant_e.html
+相似图片搜索: http://www.ruanyifeng.com/blog/2011/07/principle_of_similar_image_search.html
+相似图片搜索2: http://www.ruanyifeng.com/blog/2013/03/similar_image_search_part_ii.html
+贝叶斯推断1: http://www.ruanyifeng.com/blog/2011/08/bayesian_inference_part_one.html
+※ 贝叶斯推断2: 过滤垃圾邮件 http://www.ruanyifeng.com/blog/2011/08/bayesian_inference_part_two.html
+※ 贝叶斯推断3: 拼写检查 http://www.ruanyifeng.com/blog/2012/10/spelling_corrector.html
+朴素贝叶斯分类器的应用: http://www.ruanyifeng.com/blog/2013/12/naive_bayes_classifier.html
+骰子作画: http://www.ruanyifeng.com/blog/2011/11/dice_portrait.html
+※ 基于用户投票的排名算法1: http://www.ruanyifeng.com/blog/2012/02/ranking_algorithm_hacker_news.html
+※ 基于用户投票的排名算法2: http://www.ruanyifeng.com/blog/2012/03/ranking_algorithm_reddit.html
+※ 基于用户投票的排名算法3: http://www.ruanyifeng.com/blog/2012/03/ranking_algorithm_stack_overflow.html
+※ 基于用户投票的排名算法4: 牛顿冷却定律 http://www.ruanyifeng.com/blog/2012/03/ranking_algorithm_newton_s_law_of_cooling.html
+※ 基于用户投票的排名算法5：威尔逊区间 http://www.ruanyifeng.com/blog/2012/03/ranking_algorithm_wilson_score_interval.html
+※ 基于用户投票的排名算法6：贝叶斯平均 http://www.ruanyifeng.com/blog/2012/03/ranking_algorithm_bayesian_average.html
+虚数的意义: http://www.ruanyifeng.com/blog/2012/09/imaginary_number.html
+高斯模糊: http://www.ruanyifeng.com/blog/2012/11/gaussian_blur.html
+泊松分布: http://www.ruanyifeng.com/blog/2013/01/poisson_distribution.html
+泊松分布和指数分布: http://www.ruanyifeng.com/blog/2015/06/poisson-distribution.html
+※ TF-IDF与余弦相似性的应用1: 自动提取关键词 http://www.ruanyifeng.com/blog/2013/03/tf-idf.html
+※ TF-IDF与余弦相似性的应用2: 找出相似文章 http://www.ruanyifeng.com/blog/2013/03/cosine_similarity.html
+※ TF-IDF与余弦相似性的应用3: 自动摘要 http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html
+蒙特卡罗方法: ruanyifeng.com/blog/2015/07/monte-carlo-method.html
+※ 理解矩阵乘法: http://www.ruanyifeng.com/blog/algorithm/
+识别图像边缘: http://www.ruanyifeng.com/blog/2016/07/edge-recognition.html
+神经网络: http://www.ruanyifeng.com/blog/2017/07/neural-network.html
+正态分布: http://www.ruanyifeng.com/blog/2017/08/normal-distribution.html
+图像与滤波: http://www.ruanyifeng.com/blog/2017/12/image-and-wave-filters.html
+彩票: http://www.ruanyifeng.com/blog/2018/04/lottery-mathematics.html
+※ 哈希碰撞: http://www.ruanyifeng.com/blog/2018/09/hash-collision-and-birthday-attack.html

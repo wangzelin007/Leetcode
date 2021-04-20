@@ -17,7 +17,7 @@ class Solution:
 
 # 方法一看不懂 todo
 
-# 方法二 todo 待复习
+# 方法二 complete
 # 使用 与运算 ，可获取二进制数字 num 的最右一位 n1: n1 = num & i
 # 配合 无符号右移操作 ，可获取 num 所有位的值（即 n1~ n32): num = num >> 1
 # 记录 二进制中从低位到高位，每一位出现1的次数。
@@ -40,13 +40,19 @@ class Solution:
         for num in nums:
             for j in range(32):
                 counts[j] += num & 1
-                num >> 1
+                num >>= 1
         res, m = 0, 3
+        # counts 存储从低到高
+        # [7, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        counts = [7, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4]
+        print(counts)
         for i in range(32):
-            # print(bin(res))
-            res <<= 1
-            # print(bin(res))
+            print('before', bin(res))
+            # 只能左移，右移会丢失
+            res <<= 1 # 0 的时候左移没有区别
+            print('<<', bin(res))
             res |= counts[31-i] % m
+            print('after', bin(res))
         return res if counts[31] % m == 0 else ~(res ^ 0xffffffff)
 
 if __name__ == '__main__':
