@@ -14,22 +14,69 @@
 # 链接：https://leetcode-cn.com/problems/dui-lie-de-zui-da-zhi-lcof
 # 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
-class MaxQueue:
+# class MaxQueue1:
+#
+#     def __init__(self):
+#         self.q = []
+#         self.max = []
+#
+#     def max_value(self) -> int:
+#         return self.max[0] if self.max else -1
+#
+#     def push_back(self, value: int) -> None:
+#         while self.max and value > self.max[-1]:
+#             self.max.pop()
+#         self.q.append(value)
+#         self.max.append(value) # [3, 1] or [4]
+#
+#     def pop_front(self) -> int:
+#         if self.max:
+#             res = self.q.pop(0)
+#             if res == self.max[0]:
+#                 self.max.pop(0)
+#             return res
+#         else:
+#             return -1
 
+# 优化直接使用deque
+# from collections import deque
+import queue
+class MaxQueue2:
     def __init__(self):
-        pass
+        self.q = queue.Queue()
+        self.max = queue.deque()
 
     def max_value(self) -> int:
-        pass
+        return self.max[0] if self.max else -1
 
     def push_back(self, value: int) -> None:
-        pass
+        self.q.put(value)
+        while self.max and value > self.max[-1]:
+            self.max.pop()
+        self.max.append(value)
 
     def pop_front(self) -> int:
-        pass
+        if self.q.empty(): return -1
+        val = self.q.get()
+        if val == self.max[0]:
+            self.max.popleft()
+        return val
 
-# Your MaxQueue object will be instantiated and called as such:
-# obj = MaxQueue()
-# param_1 = obj.max_value()
-# obj.push_back(value)
-# param_3 = obj.pop_front()
+if __name__ == '__main__':
+    obj = MaxQueue2()
+    # 1
+    # print(obj.push_back(1))
+    # print(obj.push_back(2))
+    # print(obj.max_value())
+    # print(obj.pop_front())
+    # print(obj.max_value())
+    # 2
+    print(obj.pop_front())
+    print(obj.pop_front())
+    print(obj.pop_front())
+    print(obj.pop_front())
+    print(obj.pop_front())
+    print(obj.push_back(15))
+    print(obj.max_value())
+    print(obj.push_back(9))
+    print(obj.max_value())
