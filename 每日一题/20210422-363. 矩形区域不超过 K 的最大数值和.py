@@ -10,3 +10,51 @@
 # 来源：力扣（LeetCode）
 # 链接：https://leetcode-cn.com/problems/max-sum-of-rectangle-no-larger-than-k
 # 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+# 大概懂了
+# 20210422
+from sortedcontainers import SortedList
+from typing import List
+class Solution:
+    def maxSumSubmatrix(self, matrix: List[List[int]], k: int) -> int:
+        ans = float("-inf")
+        m, n = len(matrix), len(matrix[0])
+
+        for i in range(m):   # 枚举上边界
+            total = [0] * n
+            for j in range(i, m):   # 枚举下边界
+                for c in range(n):
+                    total[c] += matrix[j][c]   # 更新每列的元素和
+
+                totalSet = SortedList([0])
+                s = 0
+                for v in total:
+                    s += v
+                    # lb = totalSet.bisect_left(s - k)
+                    import bisect
+                    lb = bisect.bisect_left(totalSet,s-k)
+                    if lb != len(totalSet):
+                        ans = max(ans, s - totalSet[lb])
+                    totalSet.add(s)
+
+        return ans
+
+    def findMaxSubArray(self, nums, k):
+        ans = float('-inf')
+        totalSet = SortedList([0])
+        s = 0
+        for v in nums:
+            s += v
+            lb = totalSet.bisect_left(s - k)
+            if lb != len(totalSet):
+                ans = max(ans, s - totalSet[lb])
+            totalSet.add(s)
+        return ans
+
+
+if __name__ == '__main__':
+    s = Solution()
+    assert s.maxSumSubmatrix([[1,0,1],[0,-2,3]], 2) == 2
+    assert s.maxSumSubmatrix([[2,2,-1]], 3) == 3
+    # nums = [1,4,7,1,1]
+    # assert s.findMaxSubArray(nums, 2) == 2
+
