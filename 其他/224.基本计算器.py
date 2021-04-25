@@ -45,7 +45,7 @@ class Solution(object):
                 # print "res",res,"stack",stack
                 # print 'finish'
         res += sign * num #最后一位的处理
-        print "sign",sign,"num",num
+        print("sign",sign,"num",num)
         return res
 
 if __name__ == '__main__':
