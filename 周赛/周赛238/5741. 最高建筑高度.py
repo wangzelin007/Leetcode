@@ -48,12 +48,12 @@ class Solution(object):
         r.sort()
         if r[-1][0] != n: # 判断如果没有最后一个限制，加上最后一个限制。
             r.append([n, n-1]) # 即使一直递增也满足 <= n-1
-        k = len(r)
+        k = len(r) # 是对相隔的r做循环，非常重要
         res = 0
         for i in range(1, k): # 从左到右传递
-            r[i][1] = min(r[i][1], r[i - 1][1] + r[i][0] - r[i - 1][0])
+            r[i][1] = min(r[i][1], r[i - 1][1] + r[i][0] - r[i - 1][0]) # 上坡
         for i in range(k - 2, -1, -1): # 从右到左传递
-            r[i][1] = min(r[i][1], r[i + 1][1] + r[i + 1][0] - r[i][0])
+            r[i][1] = min(r[i][1], r[i + 1][1] + r[i + 1][0] - r[i][0]) # 下坡
         for i in range(k-1): # 对每个区间求值，并取最大值
             best = (r[i+1][1] + r[i][1] + r[i+1][0] - r[i][0]) // 2
             res = max(res, best)
