@@ -87,63 +87,157 @@ class ZeroEvenOdd1plus:
 class ZeroEvenOdd2:
     def __init__(self, n):
         self.n = n
+        self.L = [Lock(), Lock(), Lock()] # odd even zero
+        self.L[0].acquire()
+        self.L[1].acquire()
 
     # printNumber(x) outputs "x", where x is an integer.
     def zero(self, printNumber: 'Callable[[int], None]') -> None:
-        pass
+        for i in range(self.n):
+            self.L[2].acquire()
+            printNumber(0)
+            self.L[i%2].release()
 
     def even(self, printNumber: 'Callable[[int], None]') -> None:
-        pass
+        for i in range(2, self.n+1, 2):
+            self.L[1].acquire()
+            printNumber(i)
+            self.L[2].release()
 
     def odd(self, printNumber: 'Callable[[int], None]') -> None:
-        pass
-# Event
-class ZeroEvenOdd3:
-    def __init__(self, n):
-        self.n = n
+        for i in range(1, self.n+1, 2):
+            self.L[0].acquire()
+            printNumber(i)
+            self.L[2].release()
 
-    # printNumber(x) outputs "x", where x is an integer.
-    def zero(self, printNumber: 'Callable[[int], None]') -> None:
-        pass
+# Condition
+# 首先依赖定义顺序
+# 而且不一定每一次都成功，不可取！
+# class ZeroEvenOdd3:
+#     def __init__(self, n):
+#         self.n = n
+#         self.c = Condition()
+#         self.t = 0
+#
+#     # def even(self, printNumber: 'Callable[[int], None]') -> None:
+#     #     print('even')
+#     #     self.c.acquire()
+#     #     print('even')
+#     #     for i in range(1, self.n+1):
+#     #         if self.t == 1 and i % 2 == 0:
+#     #             printNumber(i)
+#     #         self.t = 2
+#     #         self.c.wait()
+#     #         self.c.notify()
+#     #     self.c.release()
+#
+#     # printNumber(x) outputs "x", where x is an integer.
+#     def zero(self, printNumber: 'Callable[[int], None]') -> None:
+#         print('zero')
+#         self.c.acquire()
+#         print('zero')
+#         for i in range(self.n):
+#             if self.t == 0:
+#                 printNumber(0)
+#                 self.t = 1
+#             self.c.wait()
+#             self.c.notify()
+#         self.c.release()
+#
+#     def even(self, printNumber: 'Callable[[int], None]') -> None:
+#         print('even')
+#         self.c.acquire()
+#         print('even')
+#         for i in range(1, self.n+1):
+#             if self.t == 1 and i % 2 == 0:
+#                 printNumber(i)
+#             self.t = 2
+#             self.c.wait()
+#             self.c.notify()
+#         self.c.release()
+#
+#     def odd(self, printNumber: 'Callable[[int], None]') -> None:
+#         print('odd')
+#         self.c.acquire()
+#         print('odd')
+#         for i in range(1, self.n+1):
+#             if self.t == 2 and i % 2 == 1:
+#                 printNumber(i)
+#             self.t = 0
+#             self.c.notify()
+#             self.c.wait()
+#         self.c.release()
 
-    def even(self, printNumber: 'Callable[[int], None]') -> None:
-        pass
-
-    def odd(self, printNumber: 'Callable[[int], None]') -> None:
-        pass
+from queue import Queue
 # queue
 class ZeroEvenOdd4:
     def __init__(self, n):
         self.n = n
+        self.queues = [Queue(), Queue(), Queue()] # odd even zero
+        self.queues[2].put(0)
 
     # printNumber(x) outputs "x", where x is an integer.
     def zero(self, printNumber: 'Callable[[int], None]') -> None:
-        pass
+        for i in range(n):
+            self.queues[2].get()
+            printNumber(0)
+            self.queues[i % 2].put(0)
 
     def even(self, printNumber: 'Callable[[int], None]') -> None:
-        pass
+        for i in range(2, self.n+1, 2):
+            self.queues[1].get()
+            printNumber(i)
+            self.queues[2].put(0)
 
     def odd(self, printNumber: 'Callable[[int], None]') -> None:
-        pass
+        for i in range(1, self.n+1, 2):
+            self.queues[0].get()
+            printNumber(i)
+            self.queues[2].put(0)
+
 # Event + Semaphore + Lock
 class ZeroEvenOdd5:
     def __init__(self, n):
         self.n = n
+        self.s = Semaphore(0) # odd even 使用
+        self.lock = Lock() # zero
+        self.event_odd = Event()
+        self.event_even = Event()
+        self.event_odd.set()
 
     # printNumber(x) outputs "x", where x is an integer.
     def zero(self, printNumber: 'Callable[[int], None]') -> None:
-        pass
+        for i in range(n):
+            self.lock.acquire()
+            printNumber(0)
+            self.s.release()
 
     def even(self, printNumber: 'Callable[[int], None]') -> None:
-        pass
+        for i in range(2, self.n+1, 2):
+            self.event_even.wait()
+            self.s.acquire()
+            printNumber(i)
+            self.event_even.clear()
+            self.lock.release()
+            self.event_odd.set()
 
     def odd(self, printNumber: 'Callable[[int], None]') -> None:
-        pass
+        for i in range(1, self.n+1, 2):
+            self.event_odd.wait() # wait True
+            self.s.acquire()
+            printNumber(i)
+            self.event_odd.clear() # -> False
+            self.lock.release()
+            self.event_even.set()
 
 if __name__ == '__main__':
     n = 5
     # foo = ZeroEvenOdd1(n)
-    foo = ZeroEvenOdd1plus(n)
+    # foo = ZeroEvenOdd1plus(n)
+    # foo = ZeroEvenOdd2(n)
+    # foo = ZeroEvenOdd3(n) # bad
+    # foo = ZeroEvenOdd4(n)
+    foo = ZeroEvenOdd5(n)
     from threading import *
     theardA = Thread(target=foo.zero, args=(printNumber,))
     theardB = Thread(target=foo.even, args=(printNumber,))
