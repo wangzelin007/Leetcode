@@ -16,6 +16,14 @@ class Solution:
         return (3*sum(list(set(nums)))-sum(nums))//2
 
 # 方法一看不懂 todo
+# 数电知识？
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        ones, twos = 0, 0
+        for num in nums:
+            ones = ones ^ num & ~twos
+            twos = twos ^ num & ~ones
+        return ones
 
 # 方法二 complete
 # 使用 与运算 ，可获取二进制数字 num 的最右一位 n1: n1 = num & i

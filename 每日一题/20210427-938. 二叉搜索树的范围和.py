@@ -47,6 +47,20 @@ class Solution:
         # 这一行卡住了，肯定是中左右的值都要， 上面两个判断会进行剪枝
         else: return root.val + self.rangeSumBST(root.left, low, high) + self.rangeSumBST(root.right, low, high)
 
+# 好理解
+class Solution(object):
+    def rangeSumBST(self, root, low, high):
+        res = 0
+        if not root:
+            return res
+        if root.val > low:
+            res += self.rangeSumBST(root.left, low, high)
+        if low <= root.val <= high:
+            res += root.val
+        if root.val < high:
+            res += self.rangeSumBST(root.right, low, high)
+        return res
+
 from collections import deque
 # BFS
 class Solution:

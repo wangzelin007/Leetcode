@@ -66,7 +66,7 @@ class Solution4:
 # 输出："00,01,02,...,10,11,12,...,97,98,99"
 # 输入：n = 3
 # 输出："000,001,002,...,100,101,102,...,997,998,999"
-class Solution4.5:
+class Solution45:
     def printNumbers(self, n):
         def dfs(x):
             if x == n:  # 终止条件：已固定完所有位

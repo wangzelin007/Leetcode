@@ -53,3 +53,24 @@
 # 来源：力扣（LeetCode）
 # 链接：https://leetcode-cn.com/problems/traffic-light-controlled-intersection
 # 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+from threading import Lock
+
+class TrafficLight:
+    def __init__(self):
+        self.roadID = 1
+        self.lock = Lock()
+
+    def carArrived(
+            self,
+            carId: int,                      # ID of the car
+            roadId: int,                     # ID of the road the car travels on. Can be 1 (road A) or 2 (road B)
+            direction: int,                  # Direction of the car
+            turnGreen: 'Callable[[], None]', # Use turnGreen() to turn light to green on current road
+            crossCar: 'Callable[[], None]'   # Use crossCar() to make car cross the intersection
+    ) -> None:
+        self.lock.acquire()
+        if self.roadID != roadId:
+            self.roadID = roadId
+            turnGreen()
+        crossCar()
+        self.lock.release()

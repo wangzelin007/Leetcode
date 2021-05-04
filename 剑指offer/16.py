@@ -5,7 +5,7 @@
     :copyright: © 2018 Wang Zelin <1064534588@qq.com>
     :license: MIT, see LICENSE for more details.
 """
-# 实现 pow(x, n) ，即计算 x 的 n 次幂函数（即，xn）。不得使用库函数，同时不需要考虑大数问题。
+# 实现pow(x,n)，即计算 x 的 n 次幂函数（即，xn）。不得使用库函数，同时不需要考虑大数问题。
 #
 # 示例 1：
 # 输入：x = 2.00000, n = 10

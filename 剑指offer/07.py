@@ -5,7 +5,7 @@
     :copyright: © 2018 Wang Zelin <1064534588@qq.com>
     :license: MIT, see LICENSE for more details.
 """
-# 前序遍历 preorder = [3,9,20,15,7]
+# 前序遍历 preorder = [3,9,20,15,7]
 # 中序遍历 inorder = [9,3,15,20,7]
 # 返回如下的二叉树：
 #     3
@@ -49,4 +49,4 @@ if __name__ == '__main__':
     inorder = [9, 3, 15, 20, 7]
     s = Solution()
     node = s.buildTree(preorder, inorder)
-    print node
+    print(node)

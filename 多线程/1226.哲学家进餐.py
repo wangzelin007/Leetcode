@@ -35,9 +35,95 @@
 # 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 from threading import *
+from typing import Callable
 # from multiprocessing import Process as Thread
 
-class DiningPhilosophers():
+# 奇数编号的哲学家先拿左边叉子
+# 偶数编号的哲学家先拿右边叉子
+class DiningPhilosophers1:
+    def __init__(self):
+        self.ForkLocks = [Lock() for _ in range(5)]
+
+    def wantsToEat(self,
+                   philosopher: int,
+                   pickLeftFork: 'Callable[[], None]',
+                   pickRightFork: 'Callable[[], None]',
+                   eat: 'Callable[[], None]',
+                   putLeftFork: 'Callable[[], None]',
+                   putRightFork: 'Callable[[], None]') -> None:
+        # 左右叉子编号
+        right_fork = philosopher
+        left_fork = (philosopher + 1) % 5
+        if philosopher % 2 == 0:
+            self.ForkLocks[right_fork].acquire()
+            self.ForkLocks[left_fork].acquire()
+        else:
+            self.ForkLocks[left_fork].acquire()
+            self.ForkLocks[right_fork].acquire()
+        pickLeftFork()
+        pickRightFork()
+        eat()
+        putLeftFork()
+        putRightFork()
+        self.ForkLocks[right_fork].release()
+        self.ForkLocks[left_fork].release()
+
+# 串行进食
+class DiningPhilosophers2:
+    def __init__(self):
+        self.lock = Lock()
+
+    def wantsToEat(self,
+                   philosopher: int,
+                   pickLeftFork: 'Callable[[], None]',
+                   pickRightFork: 'Callable[[], None]',
+                   eat: 'Callable[[], None]',
+                   putLeftFork: 'Callable[[], None]',
+                   putRightFork: 'Callable[[], None]') -> None:
+        self.lock.acquire()
+        pickRightFork()
+        pickLeftFork()
+        eat()
+        putRightFork()
+        putLeftFork()
+        self.lock.release()
+
+# 限制就餐人数为4， 4个人抢5把叉子，一定有一个人吃到并释放掉
+class DiningPhilosophers3():
+    def __init__(self):
+        self.Limit = Semaphore(4)
+        self.ForkLocks = [Lock() for _ in range(5)]
+
+    def wantsToEat(self,
+                   philosopher: int,
+                   pickLeftFork: 'Callable[[], None]', # 输入 和 返回
+                   pickRightFork: 'Callable[[], None]',
+                   eat: 'Callable[[], None]',
+                   putLeftFork: 'Callable[[], None]',
+                   putRightFork: 'Callable[[], None]') -> None:
+
+        right_fork = philosopher
+        left_fork = (philosopher + 1) % 5
+
+        self.Limit.acquire()
+        self.ForkLocks[right_fork].acquire()
+        self.ForkLocks[left_fork].acquire()
+
+        pickLeftFork()
+        pickRightFork()
+        eat()
+        putLeftFork()
+        putRightFork()
+
+        self.ForkLocks[left_fork].release()
+        self.ForkLocks[right_fork].release()
+        self.Limit.release()
+
+
+# 尝试去拿自己另外一边的叉子，那不到就把自己拿到的一把也释放掉
+philosopher = -1
+
+class DiningPhilosophers4():
     """
     output[i] = [a, b, c]
     a 哲学家编号
@@ -56,7 +142,7 @@ class DiningPhilosophers():
                    putLeftFork: 'Callable[[], None]',
                    putRightFork: 'Callable[[], None]') -> None:
         while True:
-            if self.f[philosopher].acquire(timeout=0.001):
+            if self.f[philosopher].acquire(timeout=0.001): # 通过 timeout 切换 if else
                 if philosopher != 4:
                     if self.f[philosopher+1].acquire(timeout=0.001):
                         pickLeftFork(philosopher)
@@ -85,6 +171,7 @@ class DiningPhilosophers():
 
 list = []
 
+# todo 如何做到像 leetcode 一样不传参调用
 def pickLeftFork(philosopher):
     list.append([philosopher, 1, 1])
 
@@ -92,8 +179,6 @@ def pickRightFork(philosopher):
     list.append([philosopher, 2, 1])
 
 def eat(philosopher):
-    import time
-    time.sleep(1)
     list.append([philosopher, 0, 3])
 
 def putLeftFork(philosopher):
@@ -103,9 +188,9 @@ def putRightFork(philosopher):
     list.append([philosopher, 2, 2])
 
 if __name__ == '__main__':
-    foo = DiningPhilosophers()
+    foo = DiningPhilosophers2()
     threads = []
-    for i in range(4):
+    for i in range(1):
         thread0 = Thread(target=foo.wantsToEat, args=(0, pickLeftFork, pickRightFork, eat, putLeftFork, putRightFork))
         thread1 = Thread(target=foo.wantsToEat, args=(1, pickLeftFork, pickRightFork, eat, putLeftFork, putRightFork))
         thread2 = Thread(target=foo.wantsToEat, args=(2, pickLeftFork, pickRightFork, eat, putLeftFork, putRightFork))
