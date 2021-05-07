@@ -61,11 +61,11 @@ class Solution:
         m, n = len(s) + 1, len(p) + 1 # 补0位 m行n列
         dp = [[False] * n for _ in range(m)]
         dp[0][0] = True
-        print dp
+        print(dp)
         # 初始化首行 ?* ?*?* ?*?*?* 都是True
         for j in range(2, n, 2):
             dp[0][j] = dp[0][j-2] and p[j - 1] == '*'
-        print dp
+        print(dp)
         for i in range(1, m):
             for j in range(1, n):
                 if p[j-1] == '*':

@@ -105,6 +105,7 @@ class Solution:
 # 我们取出 best(i−1,k−1)，它包含的三个值为 (first,first_idx,second)；
 # 如果 j = first_idx，因为 j0 != j, 那么 dp(i,j,k)=second；
 # 如果 j != first_idx，因为 j0 != j, 那么 dp(i,j,k)=first。
+# 时间复杂度由 O(m * n**2 * target) 优化为 O(m * n * target)
 class Entry:
     def __init__(self):
         self.first = float("inf")

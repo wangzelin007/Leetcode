@@ -44,7 +44,7 @@ class Solution(object):
         for num in nums:
             if votes == 0: x = num
             votes += 1 if num == x else -1
-        print x
+        print(x)
         for num in nums:
             count += 1 if num == x else 0
         return x if count > len(nums) / 2 else False
