@@ -84,6 +84,81 @@
 #        """
 from typing import List
 
-class Solution:
+# 通过 htmlParser.getUrls 获取所有的urls
+# 只访问hostname 和 startUrl 匹配的urls
+from threading import Lock, Thread
+from collections import deque
+class Solution1:
     def crawl(self, startUrl: str, htmlParser: 'HtmlParser') -> List[str]:
-        pass
+        def get_hostname(url: str) -> str:
+            return url.split('//', 1)[1].split('/', 1)[0]
+
+        def fetch(url: str) -> None:
+            for url in htmlParser.getUrls(url):
+                if get_hostname(url) == hostname:
+                    with lock:
+                        if url in visited:
+                            continue
+                        visited.add(url)
+                    thread = Thread(target=fetch, args=(url,)) # todo ?
+                    thread.start()
+                    queue.append(thread)
+
+        hostname = get_hostname(startUrl)
+        lock = Lock()
+        visited = {startUrl} # todo ?
+        main_thread = Thread(target=fetch, args=(startUrl,))
+        main_thread.start()
+        queue = deque([main_thread])
+        while queue:
+            queue.popleft().join()
+        return list(visited)
+
+import threading
+import queue
+from urllib.parse import urlsplit
+# https://yifei.me/note/818/
+# 过程中并没有显式使用锁（queue 本身是线程安全的，带锁的）。
+# 原因就在于，我们把对于需要并发访问的结构 set 限制在了一个线程中。
+class Solution2:
+    def crawl(self, startUrl: str, htmlParser: 'HtmlParser') -> List[str]:
+        domain = urlsplit(startUrl).netloc
+        requestQueue = queue.Queue()
+        resultQueue = queue.Queue()
+        requestQueue.put(startUrl)
+        for _ in range(5):
+            t = threading.Thread(target=self._crawl,
+                                 args=(domain, htmlParser, requestQueue, resultQueue))
+            t.daemon = True
+            t.start()
+        running = 1
+        visited = set([startUrl])
+        while running > 0:
+            # 主线程:
+            # 从 resultQueue 中读取一个访问的结果
+            # 判断每个 URL 是否已经被访问过
+            # 并分发到 requestQueue 中。
+            urls = resultQueue.get()
+            for url in urls:
+                if url in visited:
+                    continue
+                visited.add(url)
+                requestQueue.put(url)
+                running += 1
+            running -= 1
+        return list(visited)
+
+    def _crawl(self, domain, htmlParser, requestQueue, resultQueue):
+        # 5个并发worker:
+        # 从 requestQueue 中读取一个待访问的 url；
+        # 执行一个很耗时的网络请求：htmlParser.getUrls；
+        # 然后把获取到的新的 url 处理后放到 resultQueue 中。
+        while True:
+            url = requestQueue.get()
+            urls = htmlParser.getUrls(url)
+            newUrls = []
+            for url in urls:
+                u = urlsplit(url)
+                if u.netloc == domain:
+                    newUrls.append(url)
+            resultQueue.put(newUrls)

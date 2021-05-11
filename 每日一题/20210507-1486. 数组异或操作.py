@@ -71,7 +71,6 @@ class Solution:
         # n = 10, start = 5
         print(ret<<1 | e) # ret * 2 + e
 
-
 if __name__ == '__main__':
     s = Solution()
     n = 5; start = 0
