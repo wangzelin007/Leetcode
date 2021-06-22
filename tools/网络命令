@@ -1,0 +1,21 @@
+dhcp命令
+dhclient -r
+
+lldp 命令
+grep -ri 'bond0' /etc/sysconfig/network-scripts/
+lldptool -t -n -i enp129s0f0
+
+brctl addbr ETCD
+ip link add link bond0 name bond0.1200 type vlan id 1200
+ip link set bond0.1200 up
+brctl addif ETCD bond0.1200
+ifconfig ETCD up
+
+tcpdump -i any -enxx arp
+tcpdump -s 0 -i tapxxx -vv 'tcp'
+tcpdump host 10.10.12.20 and \ (10.10.10.14 or 10.10.11.2 \)
+tcpdump host \ (10.10.12.20 or 10.10.10.14 or 10.10.11.2 \)
+
+iptables -t nat-A POSTROUTING -s 192.168.121.0/24（内网充当其他同网段内网机器的网关） -j SNAT --to 192.168.159.128（公网ip）
+
+

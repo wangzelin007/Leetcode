@@ -3,9 +3,11 @@
 # 插入排序
 def insert_sort(alist):
     n = len(alist)
+    # n-1轮
     for i in range(1,n):
         while (i>0):
             if alist[i] < alist[i-1]:
+                # 两两交换往前挪
                 alist[i], alist[i-1] = alist[i-1], alist[i]
                 i -= 1
             else:

@@ -3,8 +3,10 @@
 # 若k之后的元素大于堆顶，则应该插入该堆，从k开始，一直循环遍历完整个数组，则堆顶就是第k大的数。
 
 #可借助python中的heapq模块实现堆的功能, 注意建立的是小根堆
+from typing import List
+
 class Solution1:
-    def findKthLargest(self, nums: list[int], k: int) -> int:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
         import heapq as hq
         heap = []
         for i in nums:
@@ -16,7 +18,7 @@ class Solution1:
 
 # 自己实现堆
 class Solution2:
-    def findKthLargest(self, nums: list[int], k: int) -> int:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
         n = len(nums)
         heap = nums[:k]
         # 建立含k个元素的小根堆
@@ -35,10 +37,10 @@ class Solution2:
     def sift(self, alist, low, high):
         # 假设只有根节点需要调整，两棵子树都是堆
         i = low
-        j = i *2 +1 #j指向i的左子树
+        j = i * 2 + 1 # j指向i的左子树
         tmp = alist[i]
-        while j <=high:
-            if j+1<= high and alist[j] > alist[j+1]: #右子树比较小,则指向右子树
+        while j <= high:
+            if j+1 <= high and alist[j+1] < alist[j]: #右子树比较小,则指向右子树
                 j = j+1
             if alist[j] < tmp:  # 若子树的值比较小，则根节点换成子树，然后向下看一层
                 alist[i] = alist[j]
@@ -51,9 +53,12 @@ class Solution2:
             alist[i] = tmp # j越界跳出循环，则把根节点放在叶子节点
 
 if __name__ == '__main__':
-    s = Solution1()
-    nums = [9,7,3,1,2,5,8,11]
-    print (sorted(nums, reverse=True))
+    s = Solution2()
+    # nums = [9,7,3,1,2,5,8,11]
+    nums = list(range(1000))
+    import random
+    random.shuffle(nums)
+    # print (sorted(nums, reverse=True))
     k = 3
     print(s.findKthLargest(nums, k))
 # 作者：xiao-xie-shui-bu-xing

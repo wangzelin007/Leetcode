@@ -25,6 +25,7 @@ class Solution:
         return arr[:k]
 
 # 快排改进 todo
+# 随机选取哨兵，然后与 l 交换
 # https://zhuanlan.zhihu.com/p/142391758
 
 # 作者：jyd

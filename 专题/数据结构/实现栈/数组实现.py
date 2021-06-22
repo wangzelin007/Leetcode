@@ -18,7 +18,7 @@ class MyStack:
     # 返回栈顶元素
     def top(self):
         if not self.isEmpty():
-            return self.items[len(self.items)-1]
+            return self.items[-1]
         else:
             return None
     # 弹栈
@@ -26,7 +26,7 @@ class MyStack:
         if not self.isEmpty():
             return self.items.pop()
         else:
-            print 'Empty, can not pop'
+            print('Empty, can not pop')
             return None
     # 压栈
     def push(self, x):
