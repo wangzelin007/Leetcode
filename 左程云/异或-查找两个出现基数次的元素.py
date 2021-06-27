@@ -6,9 +6,20 @@ def OddTimesNum(li):
         xor ^= i
     print(xor)
     # 寻找第一个1
-    # java: (a ^ (~a + 1))
-    # python: (a ^ (a - 1))
-    firstOne = xor ^ (xor - 1)
+    # java: (a & (~a + 1))
+    # 取反再+1 其实就是负数的补码表示？
+    # ~ 如果位为0，结果是1，如果位为1，结果是0
+    # 0001
+    # 1111
+    # 0001
+    # python: (a & (~a + 1)) == (a & (-a))
+    # Python位运算 数字在计算机中是以补码保存的，所以用Python位运算作用在补码上
+    # python 负数的补码表示 bin(-2 & 0xffffffff)
+    # n & (n - 1) 消除一个1，可以用来计算 1 的个数
+    # a = 1,原码 0001, 补码 0001
+    # -a = -1,原码 1001, 补码 1111
+    # https://blog.csdn.net/u011452172/article/details/78190187
+    firstOne = xor & (-xor)
     print(firstOne)
     # 部分异或得出第一个数
     firstNum = 0

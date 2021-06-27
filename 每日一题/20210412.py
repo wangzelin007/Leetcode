@@ -31,8 +31,8 @@ def auxComp(x, y):
 
 class Solution:
     def largestNumber(self, nums):
-        # 实现compare 需要 -1 1 0 三种，默认的是升序
-        # 需要降序所以 x+y < y+x
+        # 实现compare 需要 -1 1 0 三种
+        # 需要实现降序，所以 > return -1; < return 1
         nums.sort(key=cmp_to_key(auxComp))
         ans = ''.join([str(num) for num in nums])
         return str(int(ans))

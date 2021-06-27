@@ -1,3 +1,4 @@
+# 递归
 def merge(li, low, mid, high):
     i = low
     j = mid + 1
@@ -24,9 +25,25 @@ def merge_sort(li, low, high):
         merge_sort(li, mid+1, high)
         merge(li, low, mid, high)
 
+# 非递归
+def merge_sort2(li, low, high):
+    merge_size = 1
+    n = len(li)
+    while merge_size < n:
+        low = 0
+        while low < n:
+            mid = low + merge_size - 1
+            if mid >= n: break
+            high = min(mid + merge_size, n - 1)
+            merge(li, low, mid, high)
+            low = high + 1
+        if merge_size > n // 2: break # for java 32 int
+        merge_size <<= 1
+
 li = list(range(100))
 import random
 random.shuffle(li)
 print(li)
-merge_sort(li, 0, len(li)-1)
+# merge_sort(li, 0, len(li)-1)
+merge_sort2(li, 0, len(li)-1)
 print(li)

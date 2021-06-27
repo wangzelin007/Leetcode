@@ -1,7 +1,7 @@
 # _*_ coding: utf-8 _*_
 # 拆分到单个元素，然后两个两个往上进行递归合并。设置left 和right两个游标,进行合并。
 # 时间复杂度：o(nlogn)
-# 归并排序
+# 归并排序递归，不太好理解
 def merge_sort(alist):
     n = len(alist)
     if n <= 1:

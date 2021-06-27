@@ -47,7 +47,7 @@ from heapq import heapify, heappop, heappush
 def f1(m, n, tasks):
     # m 代表每位面试官最多面试的人
     # n 代表总面试次数
-    # 对每一场面试排序
+    # 对每一场面试按开始时间排序，开始时间相同的按照结束时间排序
     tasks = sorted(tasks, key=(lambda x: [x[0],x[1]]), reverse=False)
     print(tasks)
     l, r = n // m, n
@@ -62,26 +62,25 @@ def f1(m, n, tasks):
     return ans
 
 def can_make(mid, m, n, tasks):
-    # 对每一位面试官记录可以面试的场次,同时代表闲着的面试官,再记录一下每个面试官的结束时间
+    # 记录每一位面试官已经面试的场次,和结束时间
     p_free = [[0,0] for _ in range(mid)] # 最小堆
     heapify(p_free)
     print(p_free)
     # 代表忙的面试官
     p_busy = []
     # 开始面试
-    last_start, last_end = 0, 0
     for i in range(n):
         start, end = tasks[i][0], tasks[i][1]
         if i == 0:
             item = heappop(p_free)
-            if item[0]+1 <= m: # 还有面试次数
+            if item[0]+1 <= m: # 面试次数+1
                 p_busy.append([item[0]+1, end])
             else: return False
             continue
-        for i in p_busy: # 有没有可以回归空闲的面试官
-            if i[1] <= start:
-                heappush(p_free, i)
-                p_busy.remove(i)
+        for p in p_busy: # 有没有可以回归空闲的面试官
+            if p[1] <= start:
+                heappush(p_free, p)
+                p_busy.remove(p)
         if len(p_free) == 0:
             return False # 即没有空闲的面试官
         else:

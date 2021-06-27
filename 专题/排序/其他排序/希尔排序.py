@@ -6,16 +6,26 @@ def shell_sort(alist):
     n = len(alist)
     gap = n // 2
     while gap > 0:
-        for i in range(gap,n):
+        for i in range(gap, n):
             j = i
             while j > 0:
-                if alist[j] > alist[j-gap]:
+                if alist[j] < alist[j-gap]:
                     alist[j], alist[j-gap] = alist[j-gap], alist[j]
                     j -= gap
                 else:
                     break
         gap //= 2
     return alist
+
+def test():
+    import random
+    alist = [random.randint(0,100) for _ in range(100)]
+    print(alist)
+    shell_sort(alist)
+    print(alist)
+
+if __name__ == '__main__':
+    test()
 
 # 作者：xiao-xie-shui-bu-xing
 # 链接：https://leetcode-cn.com/problems/kth-largest-element-in-an-array/solution/ge-chong-pai-xu-suan-fa-tu-xie-zong-jie-by-ke-ai-x/
