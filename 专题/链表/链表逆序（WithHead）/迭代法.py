@@ -29,6 +29,7 @@ def reverse(head):
         cur = next
     return pre
 
+# good
 def reverseNohead(head):
     if head is None or head.next is None:
         return

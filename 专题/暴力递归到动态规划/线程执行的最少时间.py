@@ -1,3 +1,6 @@
+from typing import List
+
+
 # 动态规划
 class Solution:
     def minimumTimeRequired(self, jobs: List[int], k: int) -> int:
