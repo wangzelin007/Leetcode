@@ -18,6 +18,18 @@ def process(w, v, i, rest):
         p2 = process(w, v, i+1, rest - w[i]) + v[i]
     return max(p1, p2)
 
+def maxValue3(w, v, bag):
+    n = len(w)
+    dp = [[0] * (bag + 1) for _ in range(n + 1)]
+    for i in range(n-1, -1, -1):
+        for rest in range(bag+1):
+            p1 = dp[i + 1][rest]
+            p2 = -1
+            if rest >= w[i]:
+                p2 = v[i] + dp[i + 1][rest - w[i]]
+            dp[i][rest] = max(p1, p2)
+    return dp[0][bag]
+
 def maxValue2(w, v, bag):
     return process2(w, v, 0, 0, bag)
 
@@ -38,7 +50,7 @@ def test():
     v = [2,3,1,4,1]
     bag = 5
     print(maxValue(w,v,bag))
-    assert maxValue(w, v, bag) == maxValue2(w, v, bag)
+    assert maxValue(w, v, bag) == maxValue2(w, v, bag) == maxValue3(w, v, bag)
 
 if __name__ == '__main__':
     test()

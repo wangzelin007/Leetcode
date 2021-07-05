@@ -22,6 +22,42 @@ def process(N, cur, rest, P):
         return process(N, N-1, rest-1, P)
     return process(N, cur+1, rest-1, P) + process(N, cur-1, rest-1, P)
 
+def robotWalk4(N, M, K, P):
+    if (N < 2 or M < 1 or M > N or K < 1 or P < 1 or P > N):
+        return 0
+    dp = [[0] * (N + 1) for _ in range(K + 1)]
+    # 剩余0步 来到了P位置 已知最小的
+    dp[0][P] = 1
+    # i 代表剩余步数
+    # j 代表位置
+    # 顺推下一步的位置
+    for i in range(1, K + 1):
+        for j in range(1, N + 1):
+            if j == 1:
+                dp[i][j] = dp[i-1][j+1]
+            elif j == N:
+                dp[i][j] = dp[i-1][j-1]
+            else:
+                dp[i][j] = dp[i-1][j-1] + dp[i-1][j+1]
+    return dp[K][M]
+
+def robotWalk3(N, M, K, P):
+    if (N < 2 or M < 1 or M > N or K < 1 or P < 1 or P > N):
+        return 0
+    dp = [[0] * (N + 1) for _ in range(K + 1)]
+    dp[K][M] = 1 # 剩余K步可以使用时，来到了位置M，已知最大的。
+    # 逆推上一步的位置
+    for i in range(K - 1, -1, -1):
+        for j in range(1, N + 1):
+            if j == 1:
+                dp[i][j] = dp[i+1][j+1]
+            elif j == N:
+                dp[i][j] = dp[i+1][j-1]
+            else:
+                dp[i][j] = dp[i+1][j-1] + dp[i+1][j+1]
+    return dp[0][P]
+
+# 笨缓存
 def robotWalk2(N, M, K, P):
     if (N < 2 or M < 1 or M > N or K < 1 or P < 1 or P > N):
         return 0
@@ -52,6 +88,8 @@ def test():
     P = 3
     assert robotWalk(N, M, K, P) == 3
     assert robotWalk2(N, M, K, P) == 3
+    assert robotWalk3(N, M, K, P) == 3
+    assert robotWalk4(N, M, K, P) == 3
 
 if __name__ == '__main__':
     test()

@@ -37,9 +37,9 @@ def winner(arr):
     return max(f[l][r], s[l][r])
 
 def test():
-    arr = [4,5,9,7]
-    assert cardsInLine(arr) == 13
-    assert winner(arr) == 13
+    arr = [4,7,9,5,19,29,80,4]
+    assert cardsInLine(arr) == 112
+    assert winner(arr) == 112
 
 if __name__ == '__main__':
     test()

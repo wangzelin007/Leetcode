@@ -4,7 +4,7 @@ def OddTimesNum(li):
     xor = 0
     for i in li:
         xor ^= i
-    print(xor)
+    # print(xor)
     # 寻找第一个1
     # java: (a & (~a + 1))
     # 取反再+1 其实就是负数的补码表示？
@@ -20,7 +20,7 @@ def OddTimesNum(li):
     # -a = -1,原码 1001, 补码 1111
     # https://blog.csdn.net/u011452172/article/details/78190187
     firstOne = xor & (-xor)
-    print(firstOne)
+    # print(firstOne)
     # 部分异或得出第一个数
     firstNum = 0
     for i in li:
@@ -29,16 +29,29 @@ def OddTimesNum(li):
     # 得出第二个数
     return [firstNum, xor ^ firstNum]
 
+# 20210705
+def OddTimesNum2(li):
+    xor = 0
+    for i in li:
+        xor ^= i # a ^ b
+    firstZero = xor & (-xor)
+    first = 0
+    for i in li:
+        if i & firstZero != 0:
+            first ^= i
+    return [first, xor ^ first]
+
+
 def test():
     li = [2, 2, 4, 4, 4, 9, 6, 6, 8, 8, 10, 10, 12, 12]
-    print(OddTimesNum(li))
-    assert sorted(OddTimesNum(li)) == [4, 9]
+    # print(OddTimesNum(li))
+    assert sorted(OddTimesNum(li)) == sorted(OddTimesNum2(li)) == [4, 9]
     li = [2, 2, -4, -4, -4, -9, 6, 6, 8, 8, 10, 10, 12, 12]
-    print(OddTimesNum(li))
-    assert sorted(OddTimesNum(li)) == [-9, -4]
+    # print(OddTimesNum(li))
+    assert sorted(OddTimesNum(li)) == sorted(OddTimesNum2(li)) == [-9, -4]
     li = [2, 2, 4, 4, 4, -9, 6, 6, 8, 8, 10, 10, 12, 12]
-    print(OddTimesNum(li))
-    assert sorted(OddTimesNum(li)) == [-9, 4]
+    # print(OddTimesNum(li))
+    assert sorted(OddTimesNum(li)) == sorted(OddTimesNum2(li)) == [-9, 4]
 
 if __name__ == '__main__':
     test()
