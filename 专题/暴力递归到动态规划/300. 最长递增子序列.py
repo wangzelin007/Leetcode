@@ -20,7 +20,38 @@
 # 来源：力扣（LeetCode）
 # 链接：https://leetcode-cn.com/problems/longest-increasing-subsequence
 # 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+from typing import List
 
-# todo
-# todo 方法二的有效替换应该发生在替换最后一个元素上！
-# todo 可以在方法二替换那里也加一个限制条件
+
+# dp[i] 代表 nums 前 i 个数字的最长子序列长度
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        if not nums: return 0
+        dp = [1] * len(nums)
+        for i in range(len(nums)):
+            for j in range(i):
+                if nums[j] < nums[i]:
+                    dp[i] = max(dp[i], dp[j] + 1)
+        return max(dp)
+
+    def lengthOfLIS2(self, nums: List[int]) -> int:
+        tails, res = [0] * len(nums), 0
+        for num in nums:
+            i, j = 0, res
+            while i < j:
+                m = (i + j) // 2
+                if tails[m] < num: i = m + 1
+                else: j = m
+            tails[i] = num
+            if j == res: res += 1
+        return res
+
+def test():
+    s = Solution()
+    # nums = [10,9,2,5,3,7,21,18]
+    # s.lengthOfLIS(nums) == s.lengthOfLIS2(nums)
+    nums = [10,7,8,1,2,3,4,5,6]
+    s.lengthOfLIS(nums) == s.lengthOfLIS2(nums)
+
+if __name__ == '__main__':
+    test()

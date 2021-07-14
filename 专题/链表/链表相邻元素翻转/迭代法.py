@@ -34,6 +34,7 @@ def printLinkedList(head):
         print cur.data,
         cur = cur.next
 
+# 有头
 def switch(head):
     if head is None or head.next is None:
         return
@@ -47,6 +48,16 @@ def switch(head):
         cur.next = next #1>3
         pre = cur
         cur = next
+
+# 无头
+def switchPairs(self, head):
+    pre, pre.next = self, head
+    while pre.next and pre.next.next:
+        a = pre.next
+        b = a.next
+        pre.next, b.next, a.next = b, a, b.next
+        pre = a
+    return self.next
 
 if __name__ == '__main__':
     head = createLinkedList(8)
