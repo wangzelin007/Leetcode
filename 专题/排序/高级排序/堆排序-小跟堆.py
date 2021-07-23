@@ -45,7 +45,7 @@ class Solution2:
             if alist[j] < tmp:  # 若子树的值比较小，则根节点换成子树，然后向下看一层
                 alist[i] = alist[j]
                 i = j
-                j = i *2 +1
+                j = i * 2 + 1
             else:
                 alist[i] = tmp # 子树的值大于根节点，则根节点就放在这一层
                 break
