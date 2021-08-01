@@ -1,0 +1,89 @@
+自我介绍
+Good morning madam, I really appreciate the opportunity.
+my name is zelin wang, you can call me Kevin. I am 30 years old.
+I have graduated from Nanjing University of Posts and Telecommunications.
+I am from China, and now i am living in ShangHai.
+Now I am a developer of pingan Cloud,
+I was mainly responsible for the automated installation and deployment of network service platform.
+I set up the CICD process with our department.
+I am also involved in the development of nat gateway and loadbalance.
+The programming language I mainly use is python.
+And I really like microsoft, I believe i would be a great fit for microsoft azure.
+
+英文项目经历 Project Experience
+My first job was to participate in Huawei's big data project as a software outsourcing.
+My job responsibilities are as follows：
+The first point is to use python packages such as numpy and pandas to filter data.
+Then i will develop some store procedures in oracle database
+My second job was a IAAS(Infrastructure as a Service) developer for 'pingan' Cloud.
+In the first one year and a half, I was mainly responsible for the automated installation
+and deployment of network service platform with the open-source tool of Ansible.
+Ping’an cloud was developed based on openstack, therefore, I mainly deployed all the openstack network modules
+ and some middleware, such as zookeeper, redis, mysql and etcd.
+In the subsequent half a year, I was mainly responsible for the process construction of cicd.
+At the beginning, I referred to open-source communities and used redmine + gerrit + jenkins + gitlab.
+# We managed requirements and bugs with redmine and checked codes with gerrit.
+# We created many automated pipelines through jenkins for code examination, unit test, end-to-end test, packing and deployment, etc.
+# Then I took gitlab as the ultimate warehouse for the storage of codes.
+At the beginning, the product manager would enter requirements on redmine to create a requirement ID. Developers would deliver codes with the requirement ID on gerrit, we needed to fill in corresponding requirement ID or a bug ID in our commit msg.
+When codes were delivered to gerrit through git review, developers of the group would be informed by email to check the codes. Generally speaking, at least two developers would be needed to check the codes, one responsible for checking business logic, and the other for checking whether the codes have met the standards.
+Meanwhile, jenkins would automatically trigger by gerrit event and start unit test and static code checking, if the codes passed manual examination and automated checking, the next jenkins stage would be triggered, creating a pack with dev format automatically, and upgrading the package to non-production yum source, then deploying it to sit environment for test. Then, the next stage would be executed, and end-to-end test example would start to operate. Testers would log onto the test environment to execute some manual test examples. If the above-mentioned succeeded, developers needed to merge the codes to master branch with cherry pick command and give a tag number, which would trigger the pipeline of jenkins and generate a standard package with production format and upgrade it to production yum source and deploy to uat environment. Then, the automated test of uat environment would be executed. Testers would also log onto uat environment to test some examples manually. If all of the tests were passed, the package would be deployed to the production environment and restart the service through pipeline on the night of version release. If any link went wrong, a bug ID needed to be recorded in redmine and start a new round of cycle through this bug ID. Later on, Ping’an developed Wizard at the corporate level to replace the two applications of redmine and gitlab, but the overall process remained the same.
+In the next three years, I was mainly responsible for developing the two product control panels of NAT gateway and loadbalance.
+As for NAT product, I only participated in Version 1.0. We achieved snat and dnat functions through iptables, and users needed to choose a VPC to buy NAT service. Then we would create two virtual machines under this VPC. There were two NAT agents operating in the virtual machine to receive the requests of API server and generate corresponding iptables rules, meanwhile, NAT service would conduct host-standby switch through keepalived.
+Another product I participated in developing is loadbalance. I participated in its development for a relatively long period.
+For Version 1.0, we developed different drivers based on openstack to link up with different loadbalance hardware manufacturers such as F5/Huawei/H3C. We normally linked up with http restful API.
+From Version 2.0 on, we replaced hardware loadbalance with loadbalance of our independent research and development. Under the structure of Version 2.0, we achieved loadbalance through two virtual machines just as we had done for NAT products. The open-source item of LVS was used in the virtual machine. Meanwhile, we developed an LVS agent to receive the requests of API server and invoke functions related to LVS.
+For Version 3.0 , we adopted containerization. When users bought
+loadbalance service under a VPC, we would create three LVS containers and three nginx containers managed with mesos. Meanwhile, mesos was optimized to accelerate the creation and deletion of containers. We would pregenerate 70 containers on each physical machine, and the pre-generated containers would be placed under the catalogue /usr/var/lib/lxc/.pre with the version number of containers and images, so that we only needed to inject configuration to launch the container upon creation, and delete configuration files, log files, database files and snapshot files upon deletion to stop the service and move them back to the pre-generated catalogue for reuse.
+Under lvs plus nginx structure, LVS load the nginx, Nginx would load the back-end real server, and LVS would take DR mode, only revising mac address for transparent transmission to nginx, we offered high-performance loadbalance through expanding nginx horizontally, you can manually or automatic expand and reduce nginx.
+For Version 5.0, we mainly replaced containers with the native IP net namespace of Linux, we generate nginx in diffrent namespace. It would be more lightweight and namesapce only isolated networks on physical machines.
+
+The Greatest Challenge
+
+The greatest challenge is the upgrading of various versions of loadbalance. Since buying hardware equipment from manufacturers would result in excessive cost and failure to release new functions rapidly, we decided to make loadbalance through our independent research and development.
+But it was a huge challenge to upgrade the old structure to a new one. Since there were many different versions of structure; the achievement between each structure differed, and so did the data structure at the code level and the configuration data at the business level. Besides, loadbalance carried important business traffic flow, and the upgrading process needed to switch in seconds, there couldn’t be interruption for too long.
+Therefore, I developed a set of interactive transformation tools to my operation maintenance colleagues, so that they could upgrade loadbalance conveniently. Before migrate, there would be isolation through iptables rules and arptables rules on physical machines with new structure, to restrict mutual visit between these physical machines and others.
+Then, the data under old structure would be converted to API requests under new structure and create all loadbalances under new structure. Meanwhile, the data of databases and business configuration would be compared comprehensively
+Then, there would be automated tests in the isolated physical machines with new structures, testing whether these loadbalancers worked fine. After confirming there were no problems, switch command would be executed with automated tools to switch all loadbalances, namely, adding iptables and arptales rules to the physical machines with old structure while deleting iptables and arptables rules created under the new structure. Then, ARP messages were sent proactively under new structure through automated tools to update the correspondence between loadbalance VIP and mac address and achieve switch. In the end, we switched in seconds, and users didn’t sense our upgrading process.
+
+
+为什么选择微软
+In the process of learning programming, the website I often visit is Stack Overflow and github.
+I like Microsoft very much,
+because the operating system and office software we use most often are Microsoft's,
+and github, the programmer's favorite community, was also acquired by Microsoft.
+Microsoft has developed many cross-era software applications,
+and the gaming experience of xbox is also very good.
+The Microsoft interview also gave me a good impression:
+Focusing on basic skills, fancy communication and problem-solving skills, and pay attention to the code quality.
+And Microsoft promotes work life balance, which is lacking in many companies.
+I hope to have the opportunity to work at Microsoft
+And I hope to develope high-quality code at Mircrosoft
+I think programmers also need the spirit of craftsmanship. Constantly polishing the code is a very interesting thing.
+Instead of driving out one task after another in the case of 996 work schedule.
+
+advantage 优点
+eager to learn and to improve
+1. I did all the algorithmic questions in the interview,
+but the regular expression-related questions in the first round were not answered very well,
+the regular expressions were less used in the previous work.
+But since I came down, I have started to study regular expressions systematically,
+and submitted my study notes to github.
+Dare to express
+2. Although I don't speak english very well now,
+but i am eager to communicate and I believe I can grow up quickly.
+I also set aside a fixed time every day to improve my English.
+I mainly use two apps:
+one is help you to speak fluently, the other is a recite words apps).
+3. I have high sense of responsibility, I can always form a closed loop for problems at work
+
+Why left from the last company 为什么从平安云离开
+At first, Ping An chose to cooperate with Microsoft to launch cloud-related products,
+but the cooperation was terminated due to some reasons that i didn't known.
+Ping An has been actively launching its own cloud platform. We tried public cloud, government cloud, and financial cloud,
+but the results were not very good.
+Now Ping An is focus on the internal cloud,
+while many plans for new products have been shelved,
+and Ping An Cloud has a high staff turnover rate.
+But there are still many admirable colleagues in Ping An Cloud,
+and I have learned a lot from them, and I really hope to join Microsoft Azure.
