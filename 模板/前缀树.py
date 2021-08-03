@@ -5,6 +5,8 @@
     :copyright: © 2018 Wang Zelin <1064534588@qq.com>
     :license: MIT, see LICENSE for more details.
 """
+from pprint import pprint
+
 class Trie(object):
     def __init__(self):
         self.root = {}
@@ -13,6 +15,7 @@ class Trie(object):
     def insert(self, word):
         node = self.root
         for char in word:
+            # 如果键不存在于字典中，将会添加键并将值设为默认值。
             node = node.setdefault(char, {})
         node[self.end_of_word] = self.end_of_word
 
@@ -29,4 +32,17 @@ class Trie(object):
         for char in prefix:
             if char not in node:
                 return False
-            node = node
+            node = node[char]
+        return True
+
+def test():
+    t = Trie()
+    t.insert('word')
+    t.insert('peace')
+    pprint(t.root)
+    assert t.search('word') == True
+    assert t.search('wordy') == False
+    assert t.startsWith('wo') == True
+
+if __name__ == '__main__':
+    test()

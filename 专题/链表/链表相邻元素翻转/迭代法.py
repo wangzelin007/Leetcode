@@ -31,7 +31,13 @@ def createLinkedList(l):
 def printLinkedList(head):
     cur = head.next
     while cur is not None:
-        print cur.data,
+        print(cur.data, end=',')
+        cur = cur.next
+
+def printLinkedList2(head):
+    cur = head
+    while cur is not None:
+        print(cur.data, end=',')
         cur = cur.next
 
 # 有头
@@ -50,18 +56,29 @@ def switch(head):
         cur = next
 
 # 无头
-def switchPairs(self, head):
-    pre, pre.next = self, head
-    while pre.next and pre.next.next:
-        a = pre.next
-        b = a.next
-        pre.next, b.next, a.next = b, a, b.next
-        pre = a
-    return self.next
+class Solution:
+    def switchPairs(self, head):
+        pre, pre.next = self, head
+        while pre.next and pre.next.next:
+            a = pre.next
+            b = a.next
+            pre.next, a.next, b.next = b, b.next, a
+            pre = a
+        return self.next
 
 if __name__ == '__main__':
     head = createLinkedList(8)
+    from copy import deepcopy
+    head2 = deepcopy(head)
+    print('\n')
     printLinkedList(head)
     switch(head)
-    print '\n'
+    print('\n')
     printLinkedList(head)
+    s = Solution()
+    head2 = head2.next
+    print('\n')
+    printLinkedList2(head2)
+    head2 = s.switchPairs(head2)
+    print('\n')
+    printLinkedList2(head2)

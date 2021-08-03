@@ -13,7 +13,7 @@ def https_req():
     try:
         ssl._create_default_https_context = ssl._create_unverified_context
         httpsConn = httplib.HTTPSConnection(host)
-        sock = socket.create_connection(httpsConn.host, httpsConn.port)
+        sock = socket.create_connection((httpsConn.host, httpsConn.port))
         try:
             httpsConn.sock = ssl.wrap_socket(sock, ca_certs=CERT_FILE, cert_reqs=ssl.CERT_REQUIRED, ssl_version=ssl.PROTOCOL_SSLv3)
         except Exception as e:

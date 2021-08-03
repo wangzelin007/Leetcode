@@ -28,7 +28,7 @@ class Solution:
             res.append(current_level)
         return res
 
-    # BFS
+    # DFS
     def leverOrder2(self, root: TreeNode) -> List[List[int]]:
         if not root:
             return []

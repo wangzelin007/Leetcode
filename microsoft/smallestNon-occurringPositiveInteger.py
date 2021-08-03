@@ -1,3 +1,5 @@
+# 最小未出现的正整数
+
 class Solution:
 
     def firstMissPositive(self, nums: list) -> int:

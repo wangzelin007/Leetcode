@@ -1,3 +1,5 @@
+# 不重复的时间全排列
+
 def solution(A: int,B: int, C: int,D: int) -> int:
     ans = []
     s = [str(A), str(B), str(C), str(D)]
