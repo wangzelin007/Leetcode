@@ -3,3 +3,4 @@
 microsoft/interview6.txt
 *.pyc
 *.pyo
+.DS_Store
