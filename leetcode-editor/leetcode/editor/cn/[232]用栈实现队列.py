@@ -66,32 +66,47 @@
 class MyQueue(object):
 
     def __init__(self):
-
+        self.stackA = []
+        self.stackB = []
 
     def push(self, x):
         """
         :type x: int
         :rtype: None
         """
-
+        self.stackA.append(x)
 
     def pop(self):
         """
         :rtype: int
         """
-
+        if self.empty():
+            return
+        elif len(self.stackB) == 0:
+            while len(self.stackA) != 0:
+                self.stackB.append(self.stackA.pop())
+        return self.stackB.pop()
 
     def peek(self):
         """
         :rtype: int
         """
-
+        if self.empty():
+            return
+        else:
+            if len(self.stackB) != 0:
+                return self.stackB[-1]
+            else:
+                return self.stackA[0]
 
     def empty(self):
         """
         :rtype: bool
         """
-
+        if len(self.stackA) == 0 and len(self.stackB) == 0:
+            return True
+        else:
+            return False
 
 
 # Your MyQueue object will be instantiated and called as such:
@@ -101,3 +116,15 @@ class MyQueue(object):
 # param_3 = obj.peek()
 # param_4 = obj.empty()
 # leetcode submit region end(Prohibit modification and deletion)
+
+def test():
+    obj = MyQueue()
+    obj.push(1)
+    obj.push(2)
+    assert obj.peek() == 1
+    assert obj.pop() == 1
+    assert obj.empty() == False
+
+
+if __name__ == '__main__':
+    test()
